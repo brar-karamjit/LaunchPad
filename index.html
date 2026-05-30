@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Launchpad | From Docker Image to Live URL in One Click</title>
+    <meta
+      name="description"
+      content="Launchpad is a lightweight Kubernetes PaaS that lets developers deploy any Docker container with a single click."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              zinc: {
+                925: '#09090b',
+              },
+              brand: {
+                400: '#4f8cff',
+                500: '#316cff',
+                600: '#1b4dff',
+              },
+              violetbrand: {
+                400: '#8b5cf6',
+                500: '#7c3aed',
+              },
+            },
+            boxShadow: {
+              glow: '0 0 0 1px rgba(255,255,255,0.06), 0 24px 80px rgba(49,108,255,0.22)',
+              card: '0 0 0 1px rgba(255,255,255,0.08), 0 18px 60px rgba(0,0,0,0.45)',
+            },
+            fontFamily: {
+              sans: ['IBM Plex Sans', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+            backgroundImage: {
+              grid: 'linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)',
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background:
+          radial-gradient(circle at top left, rgba(124, 58, 237, 0.16), transparent 28%),
+          radial-gradient(circle at 80% 20%, rgba(49, 108, 255, 0.22), transparent 26%),
+          linear-gradient(180deg, #0b0b11 0%, #09090b 45%, #050508 100%);
+      }
+
+      .grid-overlay {
+        background-size: 42px 42px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 92%);
+        -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 92%);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-zinc-925 text-white antialiased">
+    <div class="fixed inset-0 -z-10 bg-grid grid-overlay"></div>
+    <div class="fixed left-1/2 top-0 -z-10 h-80 w-80 -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl"></div>
+    <div class="fixed right-0 top-40 -z-10 h-72 w-72 rounded-full bg-violetbrand-500/20 blur-3xl"></div>
+
+    <div class="mx-auto flex min-h-screen max-w-7xl flex-col px-6 lg:px-8">
+      <header class="sticky top-0 z-30 -mx-6 border-b border-white/10 bg-zinc-925/70 px-6 backdrop-blur lg:-mx-8 lg:px-8">
+        <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between">
+          <a href="#top" class="flex items-center gap-3 text-sm font-semibold tracking-wide text-white">
+            <span class="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-lg shadow-card">🚀</span>
+            <span class="font-display text-lg">Launchpad</span>
+          </a>
+          <div class="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
+            <a href="#features" class="transition hover:text-white">Features</a>
+            <a href="#pricing" class="transition hover:text-white">Pricing</a>
+            <a href="#docs" class="transition hover:text-white">Docs</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="#" class="hidden text-sm font-medium text-zinc-300 transition hover:text-white sm:inline-flex">Sign In</a>
+            <a
+              href="#pricing"
+              class="inline-flex items-center justify-center rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-400"
+            >
+              Deploy Free
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="top" class="flex-1">
+        <section class="relative overflow-hidden pb-20 pt-16 sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24">
+          <div class="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
+            <div class="max-w-3xl">
+              <div class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-2 text-sm text-brand-400 shadow-card">
+                <i data-lucide="rocket" class="h-4 w-4"></i>
+                Kubernetes power, minus the YAML fatigue
+              </div>
+              <h1 class="mt-8 max-w-4xl font-display text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+                From Docker Image to Live URL in One Click.
+              </h1>
+              <p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">
+                Stop wrestling with Kubernetes manifests, ingress routing, and VPS configuration. Drop your Docker image name into Launchpad and ship instantly.
+              </p>
+              <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <a
+                  href="#pricing"
+                  class="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100"
+                >
+                  Start Shipping Free
+                  <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                </a>
+                <a
+                  href="#docs"
+                  class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/20 hover:bg-white/10"
+                >
+                  Read the Docs
+                </a>
+              </div>
+              <div class="mt-10 flex flex-wrap items-center gap-6 text-sm text-zinc-400">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="shield-check" class="h-4 w-4 text-brand-400"></i>
+                  Secure namespace isolation
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="globe" class="h-4 w-4 text-brand-400"></i>
+                  HTTPS on every deploy
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="cpu" class="h-4 w-4 text-brand-400"></i>
+                  Production-ready Kubernetes under the hood
+                </div>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-brand-500/20 to-violetbrand-500/20 blur-2xl"></div>
+              <div class="relative rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-card backdrop-blur-xl sm:p-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div>
+                    <p class="text-sm font-medium text-zinc-400">Launchpad Dashboard</p>
+                    <p class="mt-1 text-lg font-semibold text-white">Deploy a container</p>
+                  </div>
+                  <span class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
+                    Cluster healthy
+                  </span>
+                </div>
+                <div class="mt-6 rounded-3xl border border-white/10 bg-zinc-950/80 p-4">
+                  <label for="docker-image" class="mb-3 block text-sm font-medium text-zinc-400">Docker image</label>
+                  <div class="flex flex-col gap-3 lg:flex-row">
+                    <div class="flex-1 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-zinc-300">
+                      [ Enter Docker Image (e.g., nginx:latest) ]
+                    </div>
+                    <button
+                      class="inline-flex items-center justify-center rounded-2xl bg-brand-500 px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-400"
+                    >
+                      [ Deploy ]
+                    </button>
+                  </div>
+                </div>
+                <div class="mt-5 rounded-3xl border border-white/10 bg-zinc-950 p-5">
+                  <div class="flex items-center gap-2 border-b border-white/10 pb-3 text-xs uppercase tracking-[0.2em] text-zinc-500">
+                    <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                    Terminal Output
+                  </div>
+                  <div class="mt-4 space-y-2 font-mono text-sm text-zinc-300">
+                    <p><span class="text-brand-400">$</span> launchpad deploy nginx:latest</p>
+                    <p class="text-zinc-500">Pulling image layers...</p>
+                    <p class="text-zinc-500">Provisioning namespace...</p>
+                    <p class="text-emerald-300">Success! App live at: https://my-app.launchpad.dev</p>
+                  </div>
+                </div>
+                <div class="mt-5 grid gap-3 sm:grid-cols-3">
+                  <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p class="text-xs uppercase tracking-[0.2em] text-zinc-500">Avg deploy</p>
+                    <p class="mt-2 text-2xl font-semibold text-white">43s</p>
+                  </div>
+                  <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p class="text-xs uppercase tracking-[0.2em] text-zinc-500">SSL</p>
+                    <p class="mt-2 text-2xl font-semibold text-white">Auto</p>
+                  </div>
+                  <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p class="text-xs uppercase tracking-[0.2em] text-zinc-500">Rollback</p>
+                    <p class="mt-2 text-2xl font-semibold text-white">1 click</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" class="py-16 sm:py-20">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-brand-400">Features</p>
+            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              The fastest route from container registry to production.
+            </h2>
+            <p class="mt-4 text-lg text-zinc-400">
+              Launchpad removes the DevOps ceremony engineers tolerate but never asked for. You ship code. We handle the cluster mechanics.
+            </p>
+          </div>
+          <div class="mt-12 grid gap-6 lg:grid-cols-3">
+            <article class="rounded-3xl border border-white/10 bg-white/5 p-7 shadow-card">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-500/15 text-brand-400">
+                <i data-lucide="boxes" class="h-6 w-6"></i>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold text-white">Zero-Config Kubernetes</h3>
+              <p class="mt-3 leading-7 text-zinc-400">
+                Built on production-ready K8s isolation without the complexity. No manifests, no ingress rules, no cluster babysitting.
+              </p>
+            </article>
+            <article class="rounded-3xl border border-white/10 bg-white/5 p-7 shadow-card">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-violetbrand-500/15 text-violetbrand-400">
+                <i data-lucide="link" class="h-6 w-6"></i>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold text-white">Instant Public URL</h3>
+              <p class="mt-3 leading-7 text-zinc-400">
+                Automatic ingress routing provisions secure SSL endpoints immediately, so your app is reachable as soon as the container is healthy.
+              </p>
+            </article>
+            <article class="rounded-3xl border border-white/10 bg-white/5 p-7 shadow-card">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-400/15 text-emerald-300">
+                <i data-lucide="shield" class="h-6 w-6"></i>
+              </div>
+              <h3 class="mt-6 text-xl font-semibold text-white">Isolated Environments</h3>
+              <p class="mt-3 leading-7 text-zinc-400">
+                Every container runs in its own secure, sandboxed namespace with strict resource limits, giving teams safe multi-tenant deployments by default.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="docs" class="py-16 sm:py-20">
+          <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-brand-400">How it works</p>
+              <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Three steps between “it works locally” and “send the link.”
+              </h2>
+              <p class="mt-4 text-lg text-zinc-400">
+                Launchpad is intentionally opinionated: enough control for serious workloads, without turning every deploy into a platform engineering side quest.
+              </p>
+            </div>
+            <div class="relative space-y-6 before:absolute before:left-5 before:top-6 before:h-[calc(100%-3rem)] before:w-px before:bg-gradient-to-b before:from-brand-400 before:to-transparent sm:before:left-6">
+              <div class="relative rounded-3xl border border-white/10 bg-white/5 p-6 shadow-card">
+                <div class="flex items-start gap-4">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-500 text-sm font-bold text-white">1</div>
+                  <div>
+                    <h3 class="text-xl font-semibold text-white">Connect or Paste</h3>
+                    <p class="mt-2 leading-7 text-zinc-400">
+                      Input your public or private Docker image. Launchpad hooks into your registry workflow without asking you to redesign it.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="relative rounded-3xl border border-white/10 bg-white/5 p-6 shadow-card">
+                <div class="flex items-start gap-4">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-500 text-sm font-bold text-white">2</div>
+                  <div>
+                    <h3 class="text-xl font-semibold text-white">Configure</h3>
+                    <p class="mt-2 leading-7 text-zinc-400">
+                      Set optional environment variables and memory limits when you need them. Stay minimal by default, tune only when the workload demands it.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="relative rounded-3xl border border-white/10 bg-white/5 p-6 shadow-card">
+                <div class="flex items-start gap-4">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-500 text-sm font-bold text-white">3</div>
+                  <div>
+                    <h3 class="text-xl font-semibold text-white">Launch</h3>
+                    <p class="mt-2 leading-7 text-zinc-400">
+                      Click deploy and watch your application scale instantly. Launchpad handles scheduling, networking, and SSL so the URL is all you think about.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing" class="py-16 sm:py-20">
+          <div class="mx-auto max-w-3xl text-center">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-brand-400">Pricing</p>
+            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Start free. Upgrade when your side project stops being a side project.
+            </h2>
+            <p class="mt-4 text-lg text-zinc-400">
+              Predictable plans for developers who want infrastructure leverage without platform overhead.
+            </p>
+          </div>
+          <div class="mt-12 grid gap-6 lg:grid-cols-2">
+            <article class="rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-card">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400">Hobby</p>
+                  <h3 class="mt-3 text-3xl font-bold text-white">$0<span class="text-base font-medium text-zinc-400">/mo</span></h3>
+                </div>
+                <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-zinc-300">For makers</span>
+              </div>
+              <p class="mt-6 text-zinc-400">Perfect for experiments, demos, and weekend projects that deserve better than a snowflake VM.</p>
+              <ul class="mt-8 space-y-4 text-sm text-zinc-300">
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-400"></i>1 active container</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-400"></i>512MB RAM</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-400"></i>Shared CPU</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-400"></i>launchpad.dev subdomain</li>
+              </ul>
+              <a href="#" class="mt-8 inline-flex w-full items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Choose Hobby</a>
+            </article>
+            <article class="rounded-[2rem] border border-brand-400/30 bg-gradient-to-b from-brand-500/15 to-white/5 p-8 shadow-glow">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-300">Pro</p>
+                  <h3 class="mt-3 text-3xl font-bold text-white">$15<span class="text-base font-medium text-zinc-300">/mo</span></h3>
+                </div>
+                <span class="rounded-full border border-brand-400/30 bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-300">Most popular</span>
+              </div>
+              <p class="mt-6 text-zinc-300">Built for consultants, indie SaaS teams, and anyone tired of treating deployment as a second job.</p>
+              <ul class="mt-8 space-y-4 text-sm text-zinc-100">
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-300"></i>Unlimited containers</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-300"></i>Up to 4GB RAM per pod</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-300"></i>Custom domain support</li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="h-4 w-4 text-brand-300"></i>Priority support</li>
+              </ul>
+              <a href="#" class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100">Choose Pro</a>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="border-t border-white/10 py-12">
+        <div class="rounded-[2rem] border border-white/10 bg-white/5 px-6 py-10 shadow-card sm:px-10 sm:py-12">
+          <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">Ready to launch?</p>
+              <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Your cluster can stay complicated. Your deploy flow should not.
+              </h2>
+            </div>
+            <a
+              href="#"
+              class="inline-flex items-center justify-center rounded-full bg-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-400"
+            >
+              Create Your Free Account
+            </a>
+          </div>
+          <div class="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
+            <p>© 2026 Launchpad. Built for engineers who would rather ship.</p>
+            <div class="flex flex-wrap items-center gap-5">
+              <a href="#" class="transition hover:text-white">Terms</a>
+              <a href="#" class="transition hover:text-white">Privacy</a>
+              <a href="#" class="transition hover:text-white">GitHub</a>
+              <a href="#" class="transition hover:text-white">Twitter</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
